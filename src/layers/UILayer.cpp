@@ -17,7 +17,7 @@ struct UILayer::Private
   TP_REF_COUNT_OBJECTS("tp_maps_ui::UILayer::Private");
   TP_NONCOPYABLE(Private);
 
-  size_t fromStage;
+  std::string fromStage;
 
   Widget* rootWidget{nullptr};
   tp_maps::FontRenderer* font{nullptr};
@@ -28,7 +28,7 @@ struct UILayer::Private
   int height{0};
 
   //################################################################################################
-  Private(size_t fromStage_):
+  Private(std::string const& fromStage_):
     fromStage(fromStage_)
   {
 
@@ -43,7 +43,7 @@ struct UILayer::Private
 };
 
 //##################################################################################################
-UILayer::UILayer(size_t fromStage):
+UILayer::UILayer(std::string const& fromStage):
   d(new Private(fromStage))
 {
   d->rootWidget = new Widget();
@@ -203,7 +203,7 @@ void UILayer::stopTextInput(Widget* widget)
 //##################################################################################################
 void UILayer::update()
 {
-  if(d->fromStage==0)
+  if(d->fromStage.empty())
     tp_maps::Layer::update();
   else
     tp_maps::Layer::update({tp_maps::RenderFromStage::Stage, d->fromStage});

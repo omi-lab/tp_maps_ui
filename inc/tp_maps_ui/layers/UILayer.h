@@ -22,7 +22,7 @@ class TP_MAPS_UI_SHARED_EXPORT UILayer : public tp_maps::Layer
   friend class DrawHelper;
 public:
   //################################################################################################
-  UILayer(size_t fromStage);
+  UILayer(std::string const& fromStage);
 
   //################################################################################################
   ~UILayer() override;
